@@ -1,0 +1,23 @@
+<!-- Layout is now our parent html page, wherein all our other pages will be inheriting from, it is our baseline -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  
+    {% if title %}
+        kittmakesart - {{ title }}
+    {% else %}
+        kittmakesart
+    {% endif %}
+    </title>
+</head>
+<body>
+    <!-- This is where we will inject all our other alternate pages to -->
+         <!-- We have mpw defined a section called "content", that we will be able to dynamically override-->
+     {% block content %}
+
+     {% endblock content %}
+
+</body>
+</html>

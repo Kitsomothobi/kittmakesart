@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+<!-- Establising our content block from earlier -->
+ {% block content %}
+    <h1>Hello World</h1>
+    <p>These are my favourite fruits:</p>
+    {% for fruit in fruits %}
+        <h2>{{fruit.type}}</h2>
+        <p>{{fruit.name}}</p>
+    {% endfor %}
+{% endblock content %}
