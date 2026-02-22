@@ -1,0 +1,117 @@
+*{
+    font-family: "Poppins"
+}
+
+/* Navbar Links */
+.links a {
+  margin-left: 16px;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.75;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Dark Mode Features */
+/* Custom Button Colors - Dark Mode */
+[data-bs-theme="dark"] .btn-outline-primary {
+  --bs-btn-color: #ffffff;
+  --bs-btn-border-color: #8aadc8;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #8aadc8;
+  --bs-btn-hover-border-color: #9fbdd4;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #9fbdd4;
+  --bs-btn-active-border-color: #b4cde0;
+}
+
+[data-bs-theme="dark"] .btn-outline-secondary {
+  --bs-btn-color: #ffffff;
+  --bs-btn-border-color: #8a939b;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #b8bfc6;
+  --bs-btn-hover-border-color: #adb5bd;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #adb5bd;
+  --bs-btn-active-border-color: #a2aab2;
+}
+
+[data-bs-theme="dark"] .btn-outline-danger {
+  --bs-btn-color: #d89090;
+  --bs-btn-border-color: #d89090;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #d89090;
+  --bs-btn-hover-border-color: #e0a8a8;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #e0a8a8;
+  --bs-btn-active-border-color: #e8bcbc;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .account-heading {
+    font-size: 2rem;
+  }
+
+  .article-img {
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
+
+[data-bs-theme="dark"] {
+  --color-bg-body: #1a1a1a;
+  --color-bg-content: #2d2d2d;
+  --color-text-primary: #e0e0e0;
+  --color-text-heading: #f0f0f0;
+  --color-border: #404040;
+  --color-border-light: #4a4a4a;
+}
+
+[data-bs-theme="dark"] .content-section {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-bs-theme="dark"] article.content-section:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Custom Modal Colors */
+.modal-header.bg-success {
+  background-color: #4a7c5d !important;
+}
+
+.modal-header.bg-danger {
+  background-color: #a85b5b !important;
+}
+
+/* Ensure modal header text stays white in both themes */
+.modal-header.bg-success .modal-title,
+.modal-header.bg-danger .modal-title {
+  color: #ffffff !important;
+}

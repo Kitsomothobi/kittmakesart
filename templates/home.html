@@ -2,10 +2,22 @@
 
 <!-- Establising our content block from earlier -->
  {% block content %}
-    <h1>Hello World</h1>
-    <p>These are my favourite fruits:</p>
-    {% for fruit in fruits %}
-        <h2>{{fruit.type}}</h2>
-        <p>{{fruit.name}}</p>
-    {% endfor %}
+<section class="hero">
+
+  <!-- Personal Introduction -->
+  <div>
+    <p class="kicker">Digital Artist • Developer</p>
+    <h1>kitt.art</h1>
+    <p class="lead">
+      I build clean backend systems with FastAPI + PostgreSQL, and I take digital art commissions.
+    </p>
+
+    <!--Call to action -->
+    <div class="cta">
+      <a class="btn primary" href="#">Request a commission</a>
+    </div>
+  </div>
+   
+  </div>
+</section>
 {% endblock content %}
