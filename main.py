@@ -12,43 +12,33 @@ templates = Jinja2Templates(directory="templates")
 # From here on out, all our methods will require the request object as an input parameter
 
 
-fruits = [
-    {
-    "id": 1 ,
-    "type": "Citrus",
-    "name": "Orange"
-    },
-    {
-    "id": 2 ,
-    "type": "Citrus",
-    "name": "Lemon"
-    },
-
-    {
-    "id": 3 ,
-    "type": "Exotic",
-    "name": "Dragon Fruit"
-    }
-    
-    ]
+# Importing the local data from out makeshift database
+from local_db import BLOG_POSTS, fruits
 
 # Our routes currently return json data, in order to turn it into HTML, we need to import HTMLResponse
-@app.get("/")
+
+@app.get("/", include_in_schema=False, name="home")
 def home(request: Request):
     # This says, look in the templates object, and return for us, the home.html file. as a response
         # Additionally, templateRespose takes in an optional 3rd parameter, called the context parameter, this is usally where
         # We will be inserting our json data, in order to have it accessible to the aforementioned html page
     return templates.TemplateResponse(request, "home.html", {"fruits": fruits, "title": "Home"})
 
+@app.get("/blog")
+def blog(request: Request):
+     return templates.TemplateResponse(request, "blog.html", {"posts": BLOG_POSTS, "title": "Home"})
 
-@app.get("/fruit")
-def fruit():
-    return fruits
 
-@app.get("/fruit/{fruit_id}")
-def fruit(fruit_id: int):
-    for fruit in fruits:
-        if fruit["id"] == fruit_id:
-            return fruit
+@app.get("/blog/{post_id}",  include_in_schema=False)
+def get_page(request: Request, post_id: int):
+    for blog in BLOG_POSTS:
+        if blog["id"] == post_id:
+            title = blog["title"]
+            return templates.TemplateResponse(request, "blog_post.html", {"post": blog, "title": title})
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found :(")
-#   Instead of returning an error message, best practice calls for us to raise an actual 404 error
+
+@app.get("/api/blog")
+def blog(request: Request):
+    return BLOG_POSTS
+
+
