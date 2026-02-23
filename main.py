@@ -9,10 +9,18 @@ from fastapi import HTTPException, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
-# startlette is the actaul framework that handles our acceptions, hence why we need to make an explicit reference to it
+# startlette is the actual framework that handles our acceptions, hence why we need to make an explicit reference to it
+
+# Databases
+from database import engine
+from models import Base
+from sqlalchemy.orm import Session
+from database import SessionLocal
+from models import Commission
+
+
 
 # Templates are where we are going to write our html data in oder to make things cleaner and easier to process
-
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -35,7 +43,7 @@ def home(request: Request):
 
 @app.get("/blog")
 def blog(request: Request):
-     return templates.TemplateResponse(request, "blog.html", {"posts": BLOG_POSTS, "title": "Home"})
+     return templates.TemplateResponse(request, "blog.html", {"posts": BLOG_POSTS, "title": "Blog"})
 
 
 @app.get("/blog/{post_id}",  include_in_schema=False)
@@ -49,6 +57,36 @@ def get_page(request: Request, post_id: int):
 @app.get("/api/blog")
 def blog(request: Request):
     return BLOG_POSTS
+
+
+@app.get("/commissions")
+def commissions(request: Request):
+    return templates.TemplateResponse(request, "commissions.html",{"title": "Commissions"})
+
+@app.get("/contacts")
+def contacts(request: Request):
+    return templates.TemplateResponse(request, "contacts.html",{"title": "Contacts"})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Starlette exception handling
@@ -80,7 +118,7 @@ def general_htttp_exception_handler(request: Request, exception: StarletteHTTPEx
         status_code=exception.status_code 
     )
 
-# RequestValidation Habdling
+# RequestValidation Handling
 @app.exception_handler(RequestValidationError)
 def validation_exception_handler(request: Request, excption: RequestValidationError):
      if request.url.path.startswith("/api"):

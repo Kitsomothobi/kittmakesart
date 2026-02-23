@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Commission Me</h1>
+<p>Tell me what you want, your budget range, and your deadline.</p>
+
+<form class="form" method="post" action="/commissions">
+  <label>Name</label>
+  <input name="name" required>
+
+  <label>Email</label>
+  <input type="email" name="email" required>
+
+  <label>Type</label>
+  <select name="type">
+    <option>Portrait</option>
+    <option>Character</option>
+    <option>Concept</option>
+    <option>Other</option>
+  </select>
+
+  <label>Budget (USD)</label>
+  <input name="budget" placeholder="amount">
+
+  <label>Description</label>
+  <textarea name="description" rows="6" required></textarea>
+
+  <button type="submit">Send request</button>
+</form>
+
+<p class="muted small">Please don't spam, I'll reply by email.</p>
+{% endblock %}

@@ -10,7 +10,27 @@
   opacity: 0.75;
 }
 
+.form {
+  display: grid;
+  gap: 10px;
+  max-width: 520px;
+  margin-top: 18px;
+}
 
+.cta-btn, 
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+button {
+  cursor: pointer;
+}
 
 
 
