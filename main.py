@@ -1,6 +1,15 @@
-from fastapi import FastAPI, Request, HTTPException, status
+# Fastapi core functionality
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+
+
+# Exception handling
+from fastapi import HTTPException, status
+from fastapi.exception_handlers import request_validation_exception_handler;
+from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
+# startlette is the actaul framework that handles our acceptions, hence why we need to make an explicit reference to it
 
 # Templates are where we are going to write our html data in oder to make things cleaner and easier to process
 
@@ -42,3 +51,31 @@ def blog(request: Request):
     return BLOG_POSTS
 
 
+# Starlette exception handling
+@app.exception_handler(StarletteHTTPException)
+def general_htttp_exception_handler(request: Request, exception: StarletteHTTPException):
+    # the message object will have detailed information on the type of error, and an occompanying message
+    message = (
+        exception.detail
+        if exception.detail
+        else "An error occured, please check your request, and try again"
+               )
+    # ensuring that an api request must still return json data
+    if request.url.path.startswith("/api"):
+        return JSONResponse(
+            status_code=exception.status_code,
+            content= {"detail": message}
+        )
+
+    #Feeding the error message data, into our error.html file 
+    return templates.TemplateResponse(
+        request,
+        "error.html",
+        {
+            "status_code": exception.status_code,
+            "title": exception.status_code,
+            "message": message
+        },
+        # This ensures the browser doesn't return a 200 response code, in the event of an error occuring
+        status_code=exception.status_code 
+    )

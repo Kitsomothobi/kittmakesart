@@ -6,17 +6,18 @@
       <div class="d-flex align-items-start gap-4">
         <!-- mini profile -->
         <img class="rounded-circle article-img flex-shrink-0"
-             src="#"
-             alt="#"
+             src="{{ url_for('static',path='profile_pics/1.png')}}"
+             alt="Author's pfp"
              width="64"
              height="64"
              loading="lazy">
         <div class="flex-grow-1">
             
           <div class="article-metadata mb-2">
-            <a class="me-2" href="#">{{ post.author }}</a>
-            <small class="text-body-secondary">{{ post.date }}</small>
+             <h6 class="text-body-secondary"><i>Author: {{ post.author }} </i></h6>
+            <small class="text-body-secondary">Published: {{ post.date }}</small>
           </div>
+          <!-- Clickable link to the specific article -->
           <h2>
             <a class="article-title"
                href="{{ url_for("get_page", post_id=post.id) }}">{{ post.title}}</a>

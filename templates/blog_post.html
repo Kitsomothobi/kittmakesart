@@ -4,14 +4,15 @@
 <article class="content-section">
 <div class="d-flex align-items-start-gap4">
     <!-- Mini display image -->
-    <img class="rounded-circle article-img flex-shrink-0" src="" alt="" width="64" height="64" loading="lazy">
+    <img class="rounded-circle article-img flex-shrink-0" src="{{ url_for('static',path='profile_pics/1.png')}}" alt="Author's pfp" width="64" height="64" loading="lazy">
     <!-- Post details -->
     <div class="flex-grow-1">
         <div class="article-metadata mb-2">
-          <a class="me-2" href="#">{{ post.author }}</a>
+          <small class="text-body-secondary"><b>{{ post.author }} ⛧</b></small>
           <small class="text-body-secondary">{{ post.date }}</small>
         </div>
         <h2 class="article-title">{{ post.title }}</h2>
+        <!-- | safe, tells Jinja to render the content as html -->
         <p class="article-content">{{ post.content | safe }}</p>
         
         <div style="margin-top: 2rem;">
