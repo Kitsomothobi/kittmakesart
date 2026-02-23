@@ -1,5 +1,5 @@
 # Fastapi core functionality
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Depends, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -13,12 +13,23 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 # Databases
 from database import engine
-from models import Base
+import models
 from sqlalchemy.orm import Session
 from database import SessionLocal
 from models import Commission
+from datetime import datetime
+from fastapi.responses import RedirectResponse
+import traceback
 
+# Creating all the database tables
+models.Base.metadata.create_all(bind=engine)
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 # Templates are where we are going to write our html data in oder to make things cleaner and easier to process
 app = FastAPI()
@@ -41,6 +52,10 @@ def home(request: Request):
         # We will be inserting our json data, in order to have it accessible to the aforementioned html page
     return templates.TemplateResponse(request, "home.html", {"fruits": fruits, "title": "Home"})
 
+@app.get("/test-db")
+def test_db():
+    return {"message": "Database connected!"}
+
 @app.get("/blog")
 def blog(request: Request):
      return templates.TemplateResponse(request, "blog.html", {"posts": BLOG_POSTS, "title": "Blog"})
@@ -58,11 +73,55 @@ def get_page(request: Request, post_id: int):
 def blog(request: Request):
     return BLOG_POSTS
 
-
+# Commissions section
 @app.get("/commissions")
 def commissions(request: Request):
     return templates.TemplateResponse(request, "commissions.html",{"title": "Commissions"})
 
+@app.get("/commission_success")
+def commission_success(request: Request, name: str | None = None):
+    return templates.TemplateResponse(
+        "commission_success.html",      # template name FIRST
+        {
+            "request": request,         # request goes inside the context
+            "title": "Commission Submitted",
+            "name": name,
+            "year": datetime.now().year
+        }
+    )
+
+import traceback
+from fastapi import HTTPException
+
+@app.post("/commissions")
+def submit_commissions(
+    request: Request,
+    name: str = Form(...),
+    email: str = Form(...),
+    type: str = Form(...),
+    budget: str = Form(None),
+    description: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    try:
+        new_commission = Commission(
+            name=name,
+            email=email,
+            type=type,
+            budget=budget,
+            description=description
+        )
+        db.add(new_commission)
+        db.commit()
+        db.refresh(new_commission)
+        return RedirectResponse(
+            url=f"/commission_success?name={name}", 
+            status_code=303
+        )
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+    
 @app.get("/contacts")
 def contacts(request: Request):
     return templates.TemplateResponse(request, "contacts.html",{"title": "Contacts"})
