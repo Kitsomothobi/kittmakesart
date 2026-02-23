@@ -6,7 +6,7 @@ from fastapi.templating import Jinja2Templates
 
 # Exception handling
 from fastapi import HTTPException, status
-from fastapi.exception_handlers import request_validation_exception_handler;
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 # startlette is the actaul framework that handles our acceptions, hence why we need to make an explicit reference to it
@@ -79,3 +79,23 @@ def general_htttp_exception_handler(request: Request, exception: StarletteHTTPEx
         # This ensures the browser doesn't return a 200 response code, in the event of an error occuring
         status_code=exception.status_code 
     )
+
+# RequestValidation Habdling
+@app.exception_handler(RequestValidationError)
+def validation_exception_handler(request: Request, excption: RequestValidationError):
+     if request.url.path.startswith("/api"):
+         return JSONResponse(
+             status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+             content = {"detail": exception.errors()},
+         )
+     
+     return templates.TemplateResponse(
+         request,
+         "error.html",
+         {
+             "status_code": status.HTTP_422_UNPROCESSABLE_CONTENT,
+             "title": status.HTTP_422_UNPROCESSABLE_CONTENT,
+             "message": "Invalid Request, Please check your input"
+         },
+         status_code=status.HTTP_422_UNPROCESSABLE_CONTENT
+     )
