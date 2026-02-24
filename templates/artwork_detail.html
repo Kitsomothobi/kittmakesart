@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="art-card-detail">
+    <div class="art-card-image">
+        <img src="{{ art.image }}" alt="{{ art.title }}">
+    </div>
+
+    <div class="art-card-info">
+        <h1>{{ art.title }}</h1>
+        <p class="muted">{{ art.category }} • {{ art.year }}</p>
+
+        {% if art.description %}
+        <p class="description">{{ art.description }}</p>
+        {% endif %}
+
+        <a class="btn primary cta-btn" href="{{ url_for("commissions")}}">Request a commission</a>
+        <a href="/artworks" class="btn">Back to Gallery</a>
+    </div>
+    
+</div>
+
+
+{% endblock %}

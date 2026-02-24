@@ -2,8 +2,8 @@
 {% block content %}
 
   {% for post in posts %}
-    <article class="content-section py-3 px-4 mb-4">
-      <div class="d-flex align-items-start gap-4">
+    <article class="content-section blog-section py-3 px-4 mb-4">
+      <div class="d-flex align-items-start gap-4 blog-box">
         <!-- mini profile -->
         <img class="rounded-circle article-img flex-shrink-0"
              src="{{ url_for('static',path='profile_pics/1.png')}}"
@@ -20,7 +20,7 @@
           <!-- Clickable link to the specific article -->
           <h2>
             <a class="article-title"
-               href="{{ url_for("get_page", post_id=post.id) }}">{{ post.title}}</a>
+               href="{{ url_for("get_page", post_id=post.id) }}">📕{{ post.title}}</a>
           </h2>
         </div>
       </div>

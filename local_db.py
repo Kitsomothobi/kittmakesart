@@ -91,20 +91,20 @@ BLOG_POSTS = [
 
 ARTWORKS = [
     {
-        "id:": 1,
+        "id": 1,
         "title": "Absolute Wonder Woman",
         "category": "Characters",
         "year": 2026,
-        "image": "/static/art/2.png",
+        "image": "/static/artvault/2.png",
         "description": "Absolute wonder woman"
     },
 
      {
-        "id:": 2,
+        "id": 2,
         "title": "Zwrm",
         "category": "Portraits",
         "year": 2026,
-        "image": "/static/art/1.png",
+        "image": "/static/artvault//1.png",
         "description": "Zwrm's updated design for 2026"
     },
 
@@ -113,7 +113,7 @@ ARTWORKS = [
         "title": "Eastern-themed dragon",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/3.png",
+        "image": "/static/artvault/3.png",
         "description": "Eastern-themed dragon"
     },
 
@@ -123,7 +123,7 @@ ARTWORKS = [
         "title": "Taylor",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/4.png",
+        "image": "/static/artvault/4.png",
         "description": "I drew this for an art-trade with a friend"
     },
 
@@ -132,7 +132,7 @@ ARTWORKS = [
         "title": "Mai Shiranui",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/5.png",
+        "image": "/static/artvault/5.png",
         "description": "I made this to celebrate the official release of Fatal Fury, city of the wolves"
     },
 
@@ -141,7 +141,7 @@ ARTWORKS = [
         "title": "Beelzebub",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/6.png",
+        "image": "/static/artvault/6.png",
         "description": "Beelzebub Illustration, my favourite characeter from the Helltaker game"
     },
     {
@@ -149,7 +149,7 @@ ARTWORKS = [
         "title": "Zenny Bear",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/7.png",
+        "image": "/static/artvault/7.png",
         "description": "A commission I did for a close friend, this is also my first ever art commission"
     },
     {
@@ -157,7 +157,7 @@ ARTWORKS = [
         "title": "Kisane",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/8.png",
+        "image": "/static/artvault/8.png",
         "description": "Kisane Illustration"
     },
 
@@ -166,7 +166,7 @@ ARTWORKS = [
         "title": "Clover",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/9.png",
+        "image": "/static/artvault/9.png",
         "description": "Clover was part of my very first art-trade."
     },
     {
@@ -174,7 +174,7 @@ ARTWORKS = [
         "title": "Cassandra",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/10.png",
+        "image": "/static/artvault/10.png",
         "description": "Cassandra Cain illustration, I was massively inspired by reading the Batgirl book that came out in 2024"
     },
     {
@@ -182,7 +182,7 @@ ARTWORKS = [
         "title": "Yi",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/11.png",
+        "image": "/static/artvault/11.png",
         "description": "Yi from Nine Sols, celebrating it's 1 year release anniversary"
     },
     {
@@ -190,7 +190,7 @@ ARTWORKS = [
         "title": "Rukia",
         "category": "Characters",
         "year": 2025,
-        "image": "/static/art/12.png",
+        "image": "/static/artvault/12.png",
         "description": "Rukia Illustration"
     },
     
@@ -199,7 +199,7 @@ ARTWORKS = [
         "title": "Blissey",
         "category": "Characters",
         "year": 2024,
-        "image": "/static/art/14.png",
+        "image": "/static/artvault/14.png",
         "description": "Blissey is actually my favourite pokemon, I had such an incredible time drawing this"
     },
      {
@@ -207,7 +207,7 @@ ARTWORKS = [
         "title": "Zwrm",
         "category": "Characters",
         "year": 2024,
-        "image": "/static/art/15.png",
+        "image": "/static/artvault/15.png",
         "description": "This was Zwrm's design for 2024, and it marked the first time I ever deviated from the classic cutesy chibi design"
     },
 ]

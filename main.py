@@ -2,7 +2,7 @@
 from fastapi import FastAPI, Request, Depends, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
+import traceback
 
 # Exception handling
 from fastapi import HTTPException, status
@@ -41,7 +41,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 # Importing the local data from out makeshift database
-from local_db import BLOG_POSTS, fruits
+from local_db import BLOG_POSTS, ARTWORKS
 
 # Our routes currently return json data, in order to turn it into HTML, we need to import HTMLResponse
 
@@ -50,7 +50,7 @@ def home(request: Request):
     # This says, look in the templates object, and return for us, the home.html file. as a response
         # Additionally, templateRespose takes in an optional 3rd parameter, called the context parameter, this is usally where
         # We will be inserting our json data, in order to have it accessible to the aforementioned html page
-    return templates.TemplateResponse(request, "home.html", {"fruits": fruits, "title": "Home"})
+    return templates.TemplateResponse(request, "home.html", {"title": "Home"})
 
 @app.get("/test-db")
 def test_db():
@@ -73,7 +73,20 @@ def get_page(request: Request, post_id: int):
 def blog(request: Request):
     return BLOG_POSTS
 
-# Commissions section
+# Art showcase section -------------------------------------------------------------------------------
+@app.get("/artworks")
+def artworks(request: Request):
+    return templates.TemplateResponse(request, "artworks.html", {"pictures": ARTWORKS, "title": "Art"})
+
+@app.get("/artworks/{img_id}")
+def artwork_detail(request: Request, img_id: int):
+    for pic in ARTWORKS:
+        if pic["id"] == img_id:
+            title = "showcase"
+            return templates.TemplateResponse(request, "artwork_detail.html", {"art": pic, "title": title})
+    
+
+# Commissions section ----------------------------------------------------------------------------
 @app.get("/commissions")
 def commissions(request: Request):
     return templates.TemplateResponse(request, "commissions.html",{"title": "Commissions"})
@@ -81,17 +94,17 @@ def commissions(request: Request):
 @app.get("/commission_success")
 def commission_success(request: Request, name: str | None = None):
     return templates.TemplateResponse(
-        "commission_success.html",      # template name FIRST
+        "commission_success.html",    
         {
-            "request": request,         # request goes inside the context
+            "request": request,       
             "title": "Commission Submitted",
             "name": name,
             "year": datetime.now().year
         }
     )
 
-import traceback
-from fastapi import HTTPException
+
+
 
 @app.post("/commissions")
 def submit_commissions(
@@ -122,6 +135,17 @@ def submit_commissions(
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
     
+
+
+
+
+
+
+
+
+
+
+
 @app.get("/contacts")
 def contacts(request: Request):
     return templates.TemplateResponse(request, "contacts.html",{"title": "Contacts"})
