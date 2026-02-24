@@ -3,6 +3,14 @@ from fastapi import FastAPI, Request, Depends, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import traceback
+# Templates are where we are going to write our html data in oder to make things cleaner and easier to process
+app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Telling our program where to find templates, aka, our html files
+templates = Jinja2Templates(directory="templates")
+# From here on out, all our methods will require the request object as an input parameter
+
 
 # Exception handling
 from fastapi import HTTPException, status
@@ -20,8 +28,7 @@ from models import Commission
 from datetime import datetime
 from fastapi.responses import RedirectResponse
 import traceback
-
-# Creating all the database tables
+    #Creating all the database tables
 models.Base.metadata.create_all(bind=engine)
 
 def get_db():
@@ -31,20 +38,26 @@ def get_db():
     finally:
         db.close()
 
-# Templates are where we are going to write our html data in oder to make things cleaner and easier to process
-app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Email route
+import aiosmtplib
+from email.message import EmailMessage
+from fastapi import APIRouter
+from pydantic import BaseModel
+import os
+router = APIRouter()
 
-# Telling our program where to find templates, aka, our html files
-templates = Jinja2Templates(directory="templates")
-# From here on out, all our methods will require the request object as an input parameter
+
+
+
 
 
 # Importing the local data from out makeshift database
 from local_db import BLOG_POSTS, ARTWORKS
 
-# Our routes currently return json data, in order to turn it into HTML, we need to import HTMLResponse
 
+#Route Handling
+
+    #Home Page -----------------------------------------------
 @app.get("/", include_in_schema=False, name="home")
 def home(request: Request):
     # This says, look in the templates object, and return for us, the home.html file. as a response
@@ -56,6 +69,7 @@ def home(request: Request):
 def test_db():
     return {"message": "Database connected!"}
 
+    #Blog Page------------------------------------------------
 @app.get("/blog")
 def blog(request: Request):
      return templates.TemplateResponse(request, "blog.html", {"posts": BLOG_POSTS, "title": "Blog"})
@@ -73,7 +87,7 @@ def get_page(request: Request, post_id: int):
 def blog(request: Request):
     return BLOG_POSTS
 
-# Art showcase section -------------------------------------------------------------------------------
+    #Art showcase section-----------------------------------------------
 @app.get("/artworks")
 def artworks(request: Request):
     return templates.TemplateResponse(request, "artworks.html", {"pictures": ARTWORKS, "title": "Art"})
@@ -103,11 +117,8 @@ def commission_success(request: Request, name: str | None = None):
         }
     )
 
-
-
-
 @app.post("/commissions")
-def submit_commissions(
+async def submit_commissions(
     request: Request,
     name: str = Form(...),
     email: str = Form(...),
@@ -117,6 +128,7 @@ def submit_commissions(
     db: Session = Depends(get_db)
 ):
     try:
+        # Save to database
         new_commission = Commission(
             name=name,
             email=email,
@@ -127,15 +139,35 @@ def submit_commissions(
         db.add(new_commission)
         db.commit()
         db.refresh(new_commission)
+
+        # Send email
+        msg = EmailMessage()
+        msg["From"] = os.getenv("GMAIL_USER")
+        msg["To"] = os.getenv("GMAIL_USER")
+        msg["Subject"] = f"New commission request from {name}"
+        msg.set_content(
+            f"Name: {name}\n"
+            f"Email: {email}\n"
+            f"Type: {type}\n"
+            f"Budget: {budget}\n"
+            f"Description: {description}"
+        )
+        await aiosmtplib.send(
+            msg,
+            hostname="smtp.gmail.com",
+            port=587,
+            username=os.getenv("GMAIL_USER"),
+            password=os.getenv("GMAIL_PASSWORD"),
+            start_tls=True,
+        )
+
         return RedirectResponse(
-            url=f"/commission_success?name={name}", 
+            url=f"/commission_success?name={name}",
             status_code=303
         )
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
-    
-
 
 
 
