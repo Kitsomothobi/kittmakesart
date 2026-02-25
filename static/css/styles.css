@@ -398,22 +398,6 @@ a{
 }
 
 /* Dark mode - Art card background fix */
-[data-bs-theme="dark"] .art-card {
-  background: #2d2d2d;
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #e0e0e0;
-}
-
-[data-bs-theme="dark"] .art-card:hover {
-  border-color: #5a5a60;
-  color: var(--brand-color); 
-}
-
-[data-bs-theme="dark"] .blog-section {
-  background-color: #2d2d2d;
-  color: #e0e0e0;
-}
-
 /* This ensures the background only changes when dark mode is active */
 [data-bs-theme="dark"] .blog-article-panel {
     /* Dark, semi-transparent background */
@@ -432,3 +416,20 @@ a{
     /* Optional: A very subtle border to define the edge of the "glass" */
     border: 1px solid rgba(255, 255, 255, 0.08);
 }
+
+[data-bs-theme="dark"] .art-card {
+  background: #2d2d2d;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+[data-bs-theme="dark"] .art-card:hover {
+  border-color: #5a5a60;
+  color: var(--brand-color); 
+}
+
+[data-bs-theme="dark"] .blog-section {
+  background-color: #2d2d2d;
+  color: #e0e0e0;
+}
+
