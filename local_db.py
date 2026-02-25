@@ -8,7 +8,7 @@ BLOG_POSTS = [
         "excerpt": "Why I built this site and what I want it to become.",
         "content": """
         <p>This is the beginning of my website</p>
-        <p>I wanted a to carve out a place for myself and my art on the internet, and have a platform wherein I can share and discuss the things I truly care aboutm without having to worry about algorithms or validation</p>
+        <p>I wanted a place to carve out a place for myself and my art on the internet, and have a platform wherein I can share and discuss the things I truly care aboutm without having to worry about algorithms or validation</p>
         <p>This site will grow over time, just like my art, And I hope to bring everyone along with me for the adventure</p>
         """
     },
