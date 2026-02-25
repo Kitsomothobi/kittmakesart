@@ -14,6 +14,24 @@
         <p class="description">{{ art.description }}</p>
         {% endif %}
 
+        {% if art.audio %}
+        <div class="audio-container" style="margin-top: 1rem;">
+        <p style="font-weight: bold; margin-bottom: 0.5rem; color: #e91e63;">Voice Line:</p>
+        <audio controls style="width: 100%;">
+            <source src="{{ art.audio }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+
+        <p style="font-weight: bold; margin-bottom: 0.5rem; color: #636363;">
+        <b> <i>Voice acting credit goes to my friend, Sprung!!!</i></b> <br>
+        </p>
+        <p class="description"><i>Find more of their  work over on :</i><br> 🔞<a href="https://sprung.newgrounds.com/" target=_blank>Newgrounds</a> and 🔞<a href="https://bsky.app/profile/sprungx.bsky.social" target=_blank>Bsky</a> </p>
+
+        
+    </div>
+{% endif %}
+
         <a class="btn primary cta-btn" href="{{ url_for("commissions")}}">Request a commission</a>
         <a href="/artworks" class="btn">Back to Gallery</a>
     </div>

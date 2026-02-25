@@ -18,10 +18,14 @@
             <small class="text-body-secondary">Published: {{ post.date }}</small>
           </div>
           <!-- Clickable link to the specific article -->
+          <p>
+            <h6  class="text-body-secondary"><i>Excerpt:</i>  {{ post.excerpt }}</h6>
+          </p>
           <h2>
             <a class="article-title"
-               href="{{ url_for("get_page", post_id=post.id) }}">📕{{ post.title}}</a>
+               href="{{ url_for("get_page", post_id=post.id) }}">🔗{{ post.title}}</a>
           </h2>
+          
         </div>
       </div>
     </article>

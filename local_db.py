@@ -2,7 +2,7 @@
 BLOG_POSTS = [
     {
         "id": 1,
-        "title": "Launching kitt.art",
+        "title": "Launching my own site",
         "date": "2026-02-25",
         "author": "kitt",
         "excerpt": "Why I built this site and what I want it to become.",
@@ -15,10 +15,10 @@ BLOG_POSTS = [
   
      {
         "id": 2,
-        "title": "Designing My Gallery System",
+        "title": "Verônica, the real life Wonder Woman",
         "date": "2026-02-18",
         "author": "kitt",
-        "excerpt": "How I structured my artwork pages using FastAPI.",
+        "excerpt": "Verônica's journey.",
         "content": """
         <h1>Art: The Quintessential Form of Self-Expression</h1>
 
@@ -154,6 +154,7 @@ BLOG_POSTS = [
   <p class="closing">Valeu Verô 🫶🤍</p>
 
   <p><em>Please be sure to follow and support Verônica on all her social media platforms.</em></p>
+  <a href="https://www.reddit.com/user/De_lua1325/" target=_blank>Reddit</a>
         """
     }
 ]
@@ -166,6 +167,7 @@ ARTWORKS = [
         "year": 2026,
         "image": "/static/artvault/2.png",
         "description": "Absolute wonder woman"
+
     },
 
      {
@@ -174,7 +176,8 @@ ARTWORKS = [
         "category": "Portraits",
         "year": 2026,
         "image": "/static/artvault//1.png",
-        "description": "Zwrm's updated design for 2026"
+        "description": "Zwrm's updated design for 2026",
+        "audio": "/static/audio/ZwrmVoice.wav"
     },
 
     {

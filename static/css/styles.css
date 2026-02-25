@@ -414,3 +414,21 @@ a{
   color: #e0e0e0;
 }
 
+/* This ensures the background only changes when dark mode is active */
+[data-bs-theme="dark"] .blog-article-panel {
+    /* Dark, semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.45); 
+    
+    /* Blurs the background image directly behind the text */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+    
+    /* Adds breathing room around the text */
+    padding: 2rem; 
+    
+    /* Smooth, rounded corners */
+    border-radius: 12px; 
+    
+    /* Optional: A very subtle border to define the edge of the "glass" */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
